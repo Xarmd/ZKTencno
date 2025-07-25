@@ -1,0 +1,17 @@
+﻿@page
+@model IndexModel
+
+<h2>Numbers from Web API:</h2>
+<div id="output">Loading...</div>
+
+@section Scripts {
+    <script>
+        window.onload = function() {
+            fetch('/api/numbers')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('output').innerText = data.join(', ');
+                });
+        };
+    </script>
+}
