@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: zkteco-api
+    env: dotnet
+    buildCommand: dotnet publish ZKTencno/ZKTencno.csproj -c Release -o out
+    startCommand: dotnet out/ZKTencno.dll
+    plan: free
+    branch: master
+    region: oregon
