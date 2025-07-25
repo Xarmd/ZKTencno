@@ -1,9 +1,17 @@
 services:
   - type: web
-    name: zkteco-api
-    env: dotnet
-    buildCommand: dotnet publish ZKTencno/ZKTencno.csproj -c Release -o out
-    startCommand: dotnet out/ZKTencno.dll
-    plan: free
+    name: zktencno-api
+    runtime: dotnet
+    repo: https://github.com/Xarmd/ZKTencno
     branch: master
-    region: oregon
+    buildCommand: dotnet publish ZKTencno/ZKTencno.csproj -c Release -o out
+    startCommand: dotnet ZKTencno.dll
+    buildFilter:
+      paths:
+        - ZKTencno/**
+        - render.yaml
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        value: Server=tcp:dealer360appdb.database.windows.net,1433;Initial Catalog=dealer360dbv2;Persist Security Info=False;User ID=taq-admin;Password=T@uq33r7861;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
